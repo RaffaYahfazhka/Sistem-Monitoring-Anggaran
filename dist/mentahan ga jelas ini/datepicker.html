@@ -1,0 +1,161 @@
+<!-- PHP AJAX DATATABLES DATEPICKER NGAB -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<!-- Currencyjs -->
+
+<script>
+$(function() {
+    $("#start_date").datepicker({
+        "dateFormat": "yy-mm-dd"
+    });
+    $("#end_date").datepicker({
+        "dateFormat": "yy-mm-dd"
+    });
+});
+</script>
+
+<script>
+
+// Fetch records
+
+function fetch(start_date, end_date) {
+    $.ajax({
+        url: "records.php",
+        type: "POST",
+        data: {
+            start_date: start_date,
+            end_date: end_date
+        },
+        dataType: "json",
+        success: function(data) {
+            // Datatables
+            var i = "1";
+
+            $('#dataTables').DataTable({
+                "data": data, 
+                "info": false,
+                "paging": false, 
+                
+                
+                // responsive
+                "responsive": true,
+                "columns": [{
+                        "data": "id",
+                        "render": function(data, type, row, meta) {
+                            return i++;
+                        }
+                    },
+
+                    {
+                        "data": "tanggal",
+                        "render": function(data, type, row, meta) {
+                            return moment(row.tanggal).format('D MMMM YYYY');
+                        }
+                    },
+                    {
+                        "data": "mataanggaran"
+                    },
+                    {
+                        "data": "kodeanggaran"
+                    },
+                    {
+                        "data": "kegiatan"
+                    },
+                    {
+                        "data": "saldoawal",
+                        "render": function(data, type, row, meta) {
+                            var number = $.fn.dataTable.render
+                            .number('.', ',', 0, 'Rp.')
+                            .display(data);
+
+                        if (type === 'display') {
+                          let color = 'black';
+                          if (data < 250000) {
+                          color = 'black';
+                        } else if (data < 500000) {
+                          color = 'black';
+                        }
+
+                        return '<span style="color:' + color + '">' + number + '</span>';
+                    }
+
+                     return number;}
+                    },
+                    {
+                        "data": "nilaikegiatan",
+                        "render": function(data, type, row, meta) {
+                            var number = $.fn.dataTable.render
+                            .number('.', ',', 0, 'Rp.')
+                            .display(data);
+
+                        if (type === 'display') {
+                          let color = 'black';
+                          if (data < 250000) {
+                          color = 'black';
+                        } else if (data < 500000) {
+                          color = 'black';
+                        }
+
+                        return '<span style="color:' + color + '">' + number + '</span>';
+                    }
+
+                     return number;}
+                    },
+                    {
+                        "data": "saldoakhir",
+                        "render": function(data, type, row, meta) {
+                            var number = $.fn.dataTable.render
+                            .number('.', ',', 0, 'Rp.')
+                            .display(data);
+
+                        if (type === 'display') {
+                          let color = 'black';
+                          if (data < 250000) {
+                          color = 'black';
+                        } else if (data < 500000) {
+                          color = 'black';
+                        }
+
+                        return '<span style="color:' + color + '">' + number + '</span>';
+                    }
+
+                     return number;}
+                    },
+                    {
+                        "data": "pic"
+                    }
+                ]
+            });
+        }
+    });
+}
+fetch();
+
+// Filter
+
+$(document).on("click", "#filter", function(e) {
+    e.preventDefault();
+
+    var start_date = $("#start_date").val();
+    var end_date = $("#end_date").val();
+
+    if (start_date == "" || end_date == "") {
+        alert("both date required");
+    } else {
+        $('#dataTables').DataTable().destroy();
+        fetch(start_date, end_date);
+    }
+});
+
+
+// Reset
+
+$(document).on("click", "#reset", function(e) {
+    e.preventDefault();
+
+    $("#start_date").val(''); // empty value
+    $("#end_date").val('');
+
+    $('#dataTables').DataTable().destroy();
+    fetch();
+});
+</script>
