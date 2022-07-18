@@ -1,2 +1,7 @@
-domain : sistem-monitoring-anggaran.epizy.com
+domain hosting : sistem-monitoring-anggaran.epizy.com
 password : S1tw$hUGd4
+
+tools : https://app.infinityfree.net/
+app : Filezilla
+
+pass : UUljyh06KIxP
