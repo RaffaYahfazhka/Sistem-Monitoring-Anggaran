@@ -9,3 +9,4 @@ database : https://cpanel.epizy.com/panel/indexpl.php?option=mysql
 app : Filezilla
 
 pass : UUljyh06KIxP
+
