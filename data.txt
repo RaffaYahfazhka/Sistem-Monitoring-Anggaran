@@ -1,8 +1,11 @@
 domain hosting : sistem-monitoring-anggaran.epizy.com
 password : S1tw$hUGd4
 
-tools : https://app.infinityfree.net/
+tools : - https://app.infinityfree.net/
+        - https://cpanel.epizy.com/
+
 data : https://app.infinityfree.net/accounts/epiz_32190668
+database : https://cpanel.epizy.com/panel/indexpl.php?option=mysql
 app : Filezilla
 
 pass : UUljyh06KIxP
