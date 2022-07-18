@@ -224,15 +224,6 @@ if (isset($_POST['simpan'])) {
                         </div>
                     </div>
 
-
-                    <div class="mb-3 row">
-                        <label for="pic" class="col-sm-2 col-form-label" style="font-family: Arial; font-weight: 400;">P.I.C</label>
-                        <div class="col-sm-10">
-                            <input type="radio" class="rounded-circle h-100" id="pic" name="pic" style="margin-left: 0%;" value="Hpp">
-                            <span style="position: absolute; padding-top: 6px; margin-left: 1%;">HPP</span>
-                        </div>
-                    </div>
-
                     </div>
 
                     <a href="">
