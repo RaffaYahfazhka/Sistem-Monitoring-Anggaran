@@ -143,6 +143,8 @@ if (isset($_POST['simpan'])) { //untuk create
     <!---->
     <script src="https://cdn.datatables.net/plug-ins/1.12.1/sorting/currency.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
         <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
         <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
@@ -156,6 +158,57 @@ if (isset($_POST['simpan'])) { //untuk create
             margin-top: 0px;
         }
     </style>
+
+    <!-- Modal Pilih Tahun -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tahun</h5>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST">
+            <select name="tahun" id="tahun">
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
+                <option value="2028">2028</option>
+                <option value="2029">2029</option>
+                <option value="2030">2030</option>
+                <option value="2031">2031</option>
+                <option value="2032">2032</option>
+                <option value="2033">2033</option>
+                <option value="2034">2034</option>
+                <option value="2035">2035</option>
+                <option value="2036">2036</option>
+                <option value="2037">2037</option>
+                <option value="2038">2038</option>
+                <option value="2039">2039</option>
+                <option value="2040">2040</option>
+                <option value="2041">2041</option>
+                <option value="2042">2042</option>
+                <option value="2043">2043</option>
+                <option value="2044">2044</option>
+                <option value="2045">2045</option>
+                <option value="2046">2046</option>
+                <option value="2047">2047</option>
+                <option value="2048">2048</option>
+                <option value="2049">2049</option>
+                <option value="2050">2050</option>
+            </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" name="submit" class="btn btn-primary">Simpan</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+    
 </head>
 <body>
 
@@ -199,13 +252,24 @@ searchBtn.addEventListener("click" , () =>{
 
         <img src="../../assets/img/PaljayaLogo2.png" style="position: absolute; width: 180px;  margin-top: 40px; margin-left: 60px;">
 
+        <!-- Button Pilih Tahun -->
+        <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#exampleModal" style="position: absolute; width: 146px;  margin-top: 40px; margin-left: 1190px; ">
+          Pilih Tahun
+        </button>
+
         <span style="position: relative; left: 335px; top: 150px;"><h1><strong>MONITORING ANGGARAN</strong></h1></span>
         <br>
-        <span style="position: relative; left:-24px; top: 210px;"><h1><strong>TAHUN 2022</strong></h1></span>
+
+        <span style="position: relative; left:-24px; top: 210px;"><h1><strong>TAHUN</strong></h1></span>
+
+        <?php if( isset($_POST["submit"]) ) : ?>
+        <span style="position: relative; left:-10px; top: 210px;"><h1><strong><?= $_POST["tahun"]; ?></strong></h1></span>
+        <?php endif; ?>
+        
 </div>
 
-<div class="text-left" style="position: relative; margin-left: 88%; margin-top: 20px;">
-  <a href="rekapumum.php">
+<div class="text-left" style="position: relative; margin-left: 88%; margin-top: 30px;">
+  <a href="rekaphpp.php">
     <button class="btn btn-outline-danger col-sm-11" id="print-btn">Kembali</button>
   </a>
 </div>
