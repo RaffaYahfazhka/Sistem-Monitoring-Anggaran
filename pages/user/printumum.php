@@ -274,7 +274,7 @@ searchBtn.addEventListener("click" , () =>{
   </a>
 </div>
 
-<div class="text-left" style="position: relative; margin-left: 88%; margin-top: 30px;">
+<div class="text-left" style="position: relative; margin-left: 88%; margin-top: 10px;">
         <button onclick="window.print();" class="btn btn-outline-primary col-sm-11" id="print-btn">Print</button>
 </div>
 <br>
