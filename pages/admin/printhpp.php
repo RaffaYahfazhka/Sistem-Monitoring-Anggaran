@@ -304,7 +304,7 @@ searchBtn.addEventListener("click" , () =>{
                         <th style="font-family: Arial, Helvetica, sans-serif;">Mata Anggaran</th>
                         <th style="font-family: Arial, Helvetica, sans-serif;">Kode Anggaran</th>
                         <th style="font-family: Arial, Helvetica, sans-serif; text-align: center;">Kegiatan</th>
-                        <th style="font-family: Arial, Helvetica, sans-serif;">Saldo Awal</th>
+                        <th style="font-family: Arial, Helvetica, sans-serif; text-align: center;">Saldo Awal</th>
                         <th style="font-family: Arial, Helvetica, sans-serif;">Nilai Kegiatan</th>
                         <th style="font-family: Arial, Helvetica, sans-serif;">Saldo Akhir</th>
                         <th style="font-family: Arial, Helvetica, sans-serif;">P.I.C</th>
@@ -348,11 +348,11 @@ searchBtn.addEventListener("click" , () =>{
                 <th scope="row" style="font-family: Arial, Helvetica, sans-serif;"><?php echo $urut++ ?></th>
                                 <td scope="row" style="font-family: Arial, Helvetica, sans-serif;"><?=tgl_indo($tanggal); ?></td>
                                 <td scope="row" style="font-family: Arial, Helvetica, sans-serif;"><?php echo $mataanggaran ?></td>
-                                <td scope="row" style="font-family: Arial, Helvetica, sans-serif;"><?php echo $kodeanggaran ?></td>
+                                <td scope="row" style="font-family: Arial, Helvetica, sans-serif;"><?php echo $kodeanggaran?></td>
                                 <td scope="row" style="font-family: Arial, Helvetica, sans-serif;"><?php echo $kegiatan ?></td>
-                                <td scope="row" style="font-family: Arial, Helvetica, sans-serif;"><?php echo "Rp.". number_format($saldoawal,0,',','.'); ?></td>
-                                <td scope="row" style="font-family: Arial, Helvetica, sans-serif;"><?php echo "Rp.". number_format($nilaikegiatan,0,',','.'); ?></td>
-                                <td scope="row" style="font-family: Arial, Helvetica, sans-serif;"><?php echo "Rp.". number_format($saldoakhir,0,',','.'); ?></td>
+                                <td scope="row" style="font-family: Arial, Helvetica, sans-serif; text-align: right;"><?php echo "Rp.". number_format($saldoawal,0,',','.'); ?></td>
+                                <td scope="row" style="font-family: Arial, Helvetica, sans-serif; text-align: right;"><?php echo "Rp.". number_format($nilaikegiatan,0,',','.'); ?></td>
+                                <td scope="row" style="font-family: Arial, Helvetica, sans-serif; text-align: right;"><?php echo "Rp.". number_format($saldoakhir,0,',','.'); ?></td>
                                 <td scope="row" style="font-family: Arial, Helvetica, sans-serif;"><?php echo $pic ?></td>
   
                     </th>
