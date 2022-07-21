@@ -147,7 +147,7 @@ if (isset($_POST['simpan'])) {
     <link rel="shortcut icon" href="../../assets/img/favicon.ico" type="image/x-icon">
     
     <!--Title-->
-    <title>Rekap HPP</title> 
+    <title>Data HPP</title> 
 </head>
 
 <body>
@@ -194,6 +194,13 @@ if (isset($_POST['simpan'])) {
                         </a>
                     </li>
 
+                    <li class="search-box">
+                        <a href="registrasi.php">
+                            <i class='bx bx-user -alt icon' ></i>
+                            <span class="text nav-text"> Data User</span>
+                        </a>
+                    </li>
+
                 </ul>
             </div>
 
@@ -235,18 +242,25 @@ if (isset($_POST['simpan'])) {
             <span class="textp" style="font-family: Arial, Helvetica, sans-serif; font-size: 15px;">Rekap HPP</span> 
 
             <span class="textp" style="position: absolute; left: 81.7%; top: 11px; width:150px; height:40px; font-family: 'Poppins'; font-weight: 500; font-style: normal;">
-                User
+                Admin
             </span>
             <!-- DROPDOWN PROFILE -->
             <div class="dropdown">
 
-                <img src="../../assets/img/user.png" id="imgprofile" alt="Profile Picture" style="position: absolute; left: 930px; top: -25px; width:40px; height:40px; cursor: pointer; border-radius: 50px;">
+                <img src="../../assets/img/admin.png" id="imgprofile" alt="Profile Picture" style="position: absolute; left: 930px; top: -25px; width:40px; height:40px; cursor: pointer; border-radius: 50px;">
 
                 <div class="dropdown-content" style="position: absolute; left: 940px; top: 15.8px; border-radius: 3px;">
 
                     <a href="">
                         <span style="margin-left: 0%; text-align: left;"><?php echo $_SESSION['name'] ?></span>
                       </a>
+
+                  <a href="inputdatauser.php">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-bottom: 2.4px;" fill="currentColor" class="bi bi-person-plus-fill" viewBox="0 0 16 16">
+                      <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/><path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                    </svg>
+                    <span style="margin-left: 12%;">Add User</span>
+                  </a>
 
                   <a href="../../includes/logout.php">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" style="margin-bottom: 2.4px;" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
@@ -259,25 +273,32 @@ if (isset($_POST['simpan'])) {
 
         <br>
 
-        <div class="create-btn" style="margin-left: 2%;">
-        <form action="" method="post">
-                <table>
-                    <tr>
-                        <td><input type="date" name="dari_tgl" id="dari_tgl" class="form-control mb-2"></td>
-                        <td><input type="date" name="sampai_tgl" id="sampai_tgl" class="form-control ml-3 mb-2"></td>
-                        <td><input type="submit" class="btn btn-outline-info ml-4 mb-2" name="filter" value="Filter"></td>
-                        <td><input type="submit" class="btn btn-outline-danger ml-2 mb-2" name="reset" value="Reset"></td>
-                        <td><a href="printhpp.php"><input type="button" class="btn btn-light ml-2 mb-2" name="print" value="Print"></a></td>
-                        
-                    </tr>
-                </table>
-            </form>
-                      
-
-        </div>
+        <div class="create-btn">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-info text-white" id="basic-addon1"><i
+                                        class="fas fa-calendar-alt"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="start_date" placeholder="Dari Tanggal" readonly>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-info text-white" id="basic-addon1"><i
+                                        class="fas fa-calendar-alt"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="end_date" placeholder="Sampai Tanggal" readonly>
+                        </div>
+                         <button id="filter" class="btn btn-outline-info btn-sm">Filter</button>
+                         <button id="reset" class="btn btn-outline-warning btn-sm" style="margin-left: 4px;">Reset</button>
+                         <a href="printhpp.php"><button class="btn btn-outline-dark btn-sm" style="margin-left: 4px;">Print PDF</button></a>
+                    </div>
+                </div>
+            </div>
+            
+          </div>
 
         <div class="table-responsive">
-            <table class="table table-bordered " id="dataTable" width="99%" cellspacing="0" style="margin-left: 1.5%;">
+            <table class="table table-bordered " id="dataTables" width="99%" cellspacing="0">
                 <thead class="table-light">
                     <tr class="texttables" style="font-size: 15px;">
                         <th style="font-family: Arial, Helvetica, sans-serif;">No</th>
@@ -293,26 +314,10 @@ if (isset($_POST['simpan'])) {
                 </thead>
         <tbody>
         <?php
-            if(isset($_POST['Reset'])){
-                $dari_tgl = mysqli_real_escape_string($koneksi, $_POST['dari_tgl']);
-                $sampai_tgl = mysqli_real_escape_string($koneksi, $_POST['sampai_tgl']);
-                $sql2   = mysqli_query($koneksi, "SELECT * FROM input ORDER BY id DESC");
-            }
-
-            if(isset($_POST['filter'])){
-                $dari_tgl = mysqli_real_escape_string($koneksi, $_POST['dari_tgl']);
-                $sampai_tgl = mysqli_real_escape_string($koneksi, $_POST['sampai_tgl']);
-
-            if($dari_tgl !=null || $sampai_tgl !=null){    
-                $sql2   = mysqli_query($koneksi, "SELECT * FROM input WHERE tanggal BETWEEN '$dari_tgl' AND '$sampai_tgl' ORDER BY kodeanggaran ASC");
-            }else{
-                $sql2   = mysqli_query($koneksi, "SELECT * FROM input ORDER BY kodeanggaran ASC");
-            }
-            }else{
-            $sql2   = mysqli_query($koneksi, "SELECT * FROM input ORDER BY kodeanggaran ASC");
-            }
-            $urut =1;
-            while ($r2 = mysqli_fetch_array($sql2)) {
+            $sql2   = "SELECT * FROM input ORDER BY kodeanggaran ASC";
+            $q2     = mysqli_query($koneksi, $sql2);
+            $urut   = 1;
+            while ($r2 = mysqli_fetch_array($q2)) {
                             $id         = $r2['id'];
                             $tanggal        = $r2['tanggal'];
                             $mataanggaran      = $r2['mataanggaran'];
@@ -386,31 +391,6 @@ if (isset($_POST['simpan'])) {
 </div>
     </section>
 
-    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
-        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous">
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-    </script>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
-    </script>
-
-    <!-- Font Awesome -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
-
-    <!-- Datepicker -->
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <!-- Datatables -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.js"></script>
-
-    <!-- Momentjs -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
     <script src="../../js/sidebar.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
@@ -419,3 +399,190 @@ if (isset($_POST['simpan'])) {
 
 </body>
 </html>
+
+<script src="https://code.jquery.com/jquery-3.5.0.min.js"
+        integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <!-- Datepicker -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Datatables -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.20/b-1.6.1/b-flash-1.6.1/b-html5-1.6.1/b-print-1.6.1/r-2.2.3/datatables.min.js">
+    </script>
+    <!-- PHP AJAX DATATABLES DATEPICKER NGAB -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<!-- Currencyjs -->
+
+<script>
+$(function() {
+    $("#start_date").datepicker({
+        "dateFormat": "yy-mm-dd"
+    });
+    $("#end_date").datepicker({
+        "dateFormat": "yy-mm-dd"
+    });
+});
+</script>
+
+<script>
+
+// Fetch records
+
+function fetch(start_date, end_date) {
+    $.ajax({
+        url: "recordshpp.php",
+        type: "POST",
+        data: {
+            start_date: start_date,
+            end_date: end_date
+        },
+        dataType: "json",
+        success: function(data) {
+            // Datatables
+            var i = "1";
+
+            $('#dataTables').DataTable({
+                "data": data, 
+                "info": true,
+                "paging": true, 
+                
+                // buttons
+                "dom": "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                    "buttons": [
+                        'copy', 'csv', 'excel'
+                    ],
+                
+                // responsive
+                "responsive": true,
+                "columns": [{
+                        "data": "id",
+                        "render": function(data, type, row, meta) {
+                            return i++;
+                        }
+                    },
+
+                    {
+                        "data": "tanggal",
+                        "render": function(data, type, row, meta) {
+                            return moment(row.tanggal).format('D MMMM YYYY');
+                        }
+                    },
+                    {
+                        "data": "mataanggaran"
+                    },
+                    {
+                        "data": "kodeanggaran"
+                    },
+                    {
+                        "data": "kegiatan"
+                    },
+                    {
+                        "data": "saldoawal",
+                        "render": function(data, type, row, meta) {
+                            var number = $.fn.dataTable.render
+                            .number('.', ',', 0, 'Rp.')
+                            .display(data);
+
+                        if (type === 'display') {
+                          let color = 'black';
+                          if (data < 250000) {
+                          color = 'black';
+                        } else if (data < 500000) {
+                          color = 'black';
+                        }
+
+                        return '<span style="color:' + color + '">' + number + '</span>';
+                    }
+
+                     return number;}
+                    },
+                    {
+                        "data": "nilaikegiatan",
+                        "render": function(data, type, row, meta) {
+                            var number = $.fn.dataTable.render
+                            .number('.', ',', 0, 'Rp.')
+                            .display(data);
+
+                        if (type === 'display') {
+                          let color = 'black';
+                          if (data < 250000) {
+                          color = 'black';
+                        } else if (data < 500000) {
+                          color = 'black';
+                        }
+
+                        return '<span style="color:' + color + '">' + number + '</span>';
+                    }
+
+                     return number;}
+                    },
+                    {
+                        "data": "saldoakhir",
+                        "render": function(data, type, row, meta) {
+                            var number = $.fn.dataTable.render
+                            .number('.', ',', 0, 'Rp.')
+                            .display(data);
+
+                        if (type === 'display') {
+                          let color = 'black';
+                          if (data < 250000) {
+                          color = 'black';
+                        } else if (data < 500000) {
+                          color = 'black';
+                        }
+
+                        return '<span style="color:' + color + '">' + number + '</span>';
+                    }
+
+                     return number;}
+                    },
+                    {
+                        "data": "pic"
+                    }
+                ]
+            });
+        }
+    });
+}
+fetch();
+
+// Filter
+
+$(document).on("click", "#filter", function(e) {
+    e.preventDefault();
+
+    var start_date = $("#start_date").val();
+    var end_date = $("#end_date").val();
+
+    if (start_date == "" || end_date == "") {
+        alert("both date required");
+    } else { 
+        $('#dataTables').DataTable().destroy();
+        fetch(start_date, end_date);
+    }
+});
+
+
+// Reset
+
+$(document).on("click", "#reset", function(e) {
+    e.preventDefault();
+
+    $("#start_date").val(''); // empty value
+    $("#end_date").val('');
+
+    $('#dataTables').DataTable().destroy();
+    fetch();
+});
+</script>

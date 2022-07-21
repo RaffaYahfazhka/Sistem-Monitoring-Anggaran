@@ -144,7 +144,7 @@ if (isset($_POST['simpan'])) { //untuk create
     <link rel="shortcut icon" href="../../assets/img/favicon.ico" type="image/x-icon">
     
     <!--Title-->
-    <title>Rekap Umum</title> 
+    <title>Data HPP</title> 
 </head>
 
 <body>
@@ -236,7 +236,7 @@ if (isset($_POST['simpan'])) { //untuk create
     <section class="home" style="width: 94.5%; height: auto;">
         <div class="card-header">
             <i class="bx bx-globe bx-spin mr-0 imgdark" style="margin-left: 10px;"></i>
-            <span class="textp" style="font-family: Arial, Helvetica, sans-serif; font-size: 15px;">Rekap Umum</span> 
+            <span class="textp" style="font-family: Arial, Helvetica, sans-serif; font-size: 15px;">Data Umum</span> 
 
             <span class="textp" style="position: absolute; left: 81.7%; top: 11px; width:150px; height:40px; font-family: 'Poppins'; font-weight: 500; font-style: normal;">
                 Admin
