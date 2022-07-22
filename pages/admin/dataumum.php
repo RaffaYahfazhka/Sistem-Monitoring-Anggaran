@@ -144,7 +144,7 @@ if (isset($_POST['simpan'])) { //untuk create
     <link rel="shortcut icon" href="../../assets/img/favicon.ico" type="image/x-icon">
     
     <!--Title-->
-    <title>Data HPP</title> 
+    <title>Data Umum</title> 
 </head>
 
 <body>
@@ -238,15 +238,14 @@ if (isset($_POST['simpan'])) { //untuk create
             <i class="bx bx-globe bx-spin mr-0 imgdark" style="margin-left: 10px;"></i>
             <span class="textp" style="font-family: Arial, Helvetica, sans-serif; font-size: 15px;">Data Umum</span> 
 
-            <span class="textp" style="position: absolute; left: 81.7%; top: 11px; width:150px; height:40px; font-family: 'Poppins'; font-weight: 500; font-style: normal;">
-                Admin
-            </span>
             <!-- DROPDOWN PROFILE -->
             <div class="dropdown">
 
-                <img src="../../assets/img/admin.png" id="imgprofile" alt="Profile Picture" style="position: absolute; left: 930px; top: -25px; width:40px; height:40px; cursor: pointer; border-radius: 50px;">
+            <span class="textp" style="position: absolute; left: 940px; top: -15px; width:40px; height:40px; cursor: pointer; border-radius: 50px;">
+                Admin
+            </span>
 
-                <div class="dropdown-content" style="position: absolute; left: 930px; top: 15.8px; border-radius: 3px;">
+                <div class="dropdown-content" style="position: absolute; left: 940px; top: 15.8px; border-radius: 3px;">
 
                     <a href="">
                         <span style="margin-left: 0%; text-align: left;"><?php echo $_SESSION['name'] ?></span>
