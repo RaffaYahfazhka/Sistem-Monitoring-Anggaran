@@ -222,13 +222,12 @@ if (isset($_POST['simpan'])) {
             <i class="bx bx-user-pin bx-tada mr-0 imgdark" style="margin-left: 10px;"></i>
             <span class="textp" style="font-family: Arial, Helvetica, sans-serif; font-size: 15px;">Data User</span> 
 
-            <span class="textp" style="position: absolute; left: 81.7%; top: 11px; width:150px; height:40px; font-family: 'Poppins'; font-weight: 500; font-style: normal;">
-                Admin
-            </span>
             <!-- DROPDOWN PROFILE -->
             <div class="dropdown">
 
-                <img src="../../assets/img/admin.png" id="imgprofile" alt="Profile Picture" style="position: absolute; left: 940px; top: -25px; width:40px; height:40px; cursor: pointer; border-radius: 50px;">
+            <span class="textp" style="position: absolute; left: 940px; top: -15px; width:40px; height:40px; cursor: pointer; border-radius: 50px;">
+                Admin
+            </span>
 
                 <div class="dropdown-content" style="position: absolute; left: 940px; top: 15.8px; border-radius: 3px;">
 
