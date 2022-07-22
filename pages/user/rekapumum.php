@@ -191,13 +191,6 @@ if (isset($_POST['simpan'])) { //untuk create
                         </a>
                     </li>
 
-                    <li class="search-box">
-                        <a href="registrasi.php">
-                            <i class='bx bx-user -alt icon' ></i>
-                            <span class="text nav-text"> Data User</span>
-                        </a>
-                    </li>
-
                 </ul>
             </div>
 
